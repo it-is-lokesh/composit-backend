@@ -1,0 +1,31 @@
+{% extends 'authentication/base.html' %}
+{% block body %}
+    <H2>Sign Up</H2>
+    <form action="/signup" method="POST" style="width: 60%; margin-right: auto; margin-left: auto;">
+        {% csrf_token %}
+
+        <label for="" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="create a username (only letters and numbers)" Required>
+        <br>
+        <label for="" class="form-label">First Name</label>
+        <input type="text" class="form-control" id="fname" name="fname" placeholder="create a first name" Required>
+        <br>
+        <label for="" class="form-label">Last Name</label>
+        <input type="text" class="form-control" id="lname" name="lname" placeholder="create a lastname" Required>
+        <br>
+        <label for="" class="form-label">Email ID</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" Required>
+        <br>
+        <label for="" class="form-label">Password</label>
+        <input type="password" class="form-control" id="pass1" name="pass1" placeholder="create a password" Required>
+        <br>
+        <label for="" class="form-label">Confirm your password</label>
+        <input type="password" class="form-control" id="pass2" name="pass2" placeholder="confirm your password" Required>
+        <br>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+
+    </form>
+
+    <script src="" async defer></script>
+
+{% endblock %}

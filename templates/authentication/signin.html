@@ -1,0 +1,18 @@
+{% extends 'authentication/base.html' %}
+{% block body %}
+<H2>Sign In</H2>
+    <form action="/signin" method="POST" style="width: 60%; margin-right: auto; margin-left: auto;">
+        {% csrf_token %}
+
+        <label for="" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="create your username" Required>
+        <br>
+        <label for="" class="form-label">Password</label>
+        <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Enter your password" Required>
+        <br>
+
+        <button type="submit" class="btn btn-primary">Sign In</button>
+    </form>
+
+    <script src="" async defer></script>
+{% endblock %}
