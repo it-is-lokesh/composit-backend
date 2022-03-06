@@ -33,7 +33,6 @@ def signup(request):
         return Response(serializer.data)
 
     if request.method == "POST":
-        c = {'s': False}
         username = request.data['username']
         name = request.data['name']
         email = request.data['email']
@@ -62,14 +61,9 @@ def signup(request):
             myuser.first_name = name
             myuser.last_name = ''
             myuser.save()
-            body = render_to_string('acc_active_email.html', {
-                'user': username,
-                'domain': 'https://composit-api.herokuapp.com',
-                'uid':urlsafe_base64_encode(force_bytes(username.pk)),
-                'token':account_activation_token.make_token(username),
-            })
+            body = 'test'
             email = EmailMessage(
-                'Email verification Link | ',
+                'Email verification Link',
                 body,
                 settings.EMAIL_HOST_USER,
                 [email, 'sailokesh.gorantla@ecell-iitkgp.org'],
@@ -105,18 +99,18 @@ def signup(request):
     return Response({'fail': 'true'})
 
 
-def activate(request, uidb64, token):
-    try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
-        user = User.objects.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-    if user is not None and account_activation_token.check_token(user, token):
-        user.is_active = True
-        user.save()
-        return Response('Thank you for your email confirmation. Now you can login your account.')
-    else:
-        return Response('Activation link is invalid!')
+# def activate(request, uidb64, token):
+#     try:
+#         uid = force_text(urlsafe_base64_decode(uidb64))
+#         user = User.objects.get(pk=uid)
+#     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+#         user = None
+#     if user is not None and account_activation_token.check_token(user, token):
+#         user.is_active = True
+#         user.save()
+#         return Response('Thank you for your email confirmation. Now you can login your account.')
+#     else:
+#         return Response('Activation link is invalid!')
 
 
 @api_view(['GET', 'POST', 'OPTIONS'])
