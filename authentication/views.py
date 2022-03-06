@@ -1,26 +1,15 @@
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from userdashboard.models import userDashboard
 from django.template.loader import render_to_string
-from django.http import HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
-from rest_framework.parsers import JSONParser
 from userdashboard.serializers import userDashboardSerializer
-from authentication.serializers import UserSerializer
 from rest_framework.response import Response
-from rest_framework import status
 from django.core.mail import EmailMessage
 from django.conf import settings
-from django.views.decorators.csrf import csrf_exempt
-
-from rest_framework.decorators import authentication_classes
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.decorators import permission_classes
-from rest_framework.permissions import IsAuthenticated
-
+import json
 
 def home(request):
     return render(request, "authentication/index.html")
@@ -66,30 +55,31 @@ def signup(request):
             email.fail_silently = False
             email.send()
             context = {
-                'success': 'True',
-                'userNameExists': 'False',
-                'emailExists': 'False',
-                'username': username,
-                'name': name,
-                'collegaName': collegeName,
-                'number': number,
-                'email': email,
+                'success': 'true',
+                'userNameExists': 'false',
+                'emailExists': 'false',
+                'username': str(username),
+                'name': str(name),
+                'collegaName': str(collegeName),
+                'number': str(number),
+                'email': str(email),
                 'eventsRegistered': '',
             }
+            context = json.dumps(context)
             return Response(context)
         if len(userNameCheck):
             context = {
-                'success': 'False',
-                'userNameExists': 'True',
+                'success': 'false',
+                'userNameExists': 'true',
             }
             return Response(context)
         if len(emailCheck):
             context = {
-                'success': 'False',
-                'emailExists': 'True'
+                'success': 'false',
+                'emailExists': 'true'
             }
             return Response(context)
-    return Response({'fail': 'True'})
+    return Response({'fail': 'true'})
 
 
 @api_view(['GET', 'POST', 'OPTIONS'])
@@ -108,7 +98,7 @@ def signin(request):
         if not len(user):
             getUserDetails = userDashboard.objects.filter(username=username)
             context = {
-                'userRegistered': True,
+                'userRegistered': 'true',
                 'name': getUserDetails[0].name,
                 'collegeName': getUserDetails[0].collegeName,
                 'username': getUserDetails[0].username,
