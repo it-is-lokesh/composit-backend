@@ -14,16 +14,16 @@ from authentication.decrypter import decoder
 from django.core.mail.backends.smtp import EmailBackend
 
 
-from django.http import HttpResponse  
-from django.shortcuts import render, redirect  
-from django.contrib.auth import login, authenticate  
-from django.contrib.sites.shortcuts import get_current_site  
-from django.utils.encoding import force_bytes, force_text  
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode  
-from django.template.loader import render_to_string  
-from .token import account_activation_token  
-from django.contrib.auth.models import User  
-from django.core.mail import EmailMessage  
+# from django.http import HttpResponse  
+# from django.shortcuts import render, redirect  
+# from django.contrib.auth import login, authenticate  
+# from django.contrib.sites.shortcuts import get_current_site  
+# from django.utils.encoding import force_bytes, force_text  
+# from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode  
+# from django.template.loader import render_to_string  
+# from .token import account_activation_token  
+# from django.contrib.auth.models import User  
+# from django.core.mail import EmailMessage  
 
 def home(request):
     return render(request, "authentication/index.html")
@@ -66,12 +66,12 @@ def signup(request):
             myuser.first_name = name
             myuser.last_name = ''
             myuser.save()
-            body = render_to_string('acc_active_email.html', {  
-                'user': username,  
-                'domain': 'https://composit-api.herokuapp.com',  
-                'uid':urlsafe_base64_encode(force_bytes(username.pk)),  
-                'token':account_activation_token.make_token(username),  
-            })  
+            # body = render_to_string('acc_active_email.html', {  
+            #     'user': username,  
+            #     'domain': 'https://composit-api.herokuapp.com',  
+            #     'uid':urlsafe_base64_encode(force_bytes(username.pk)),  
+            #     'token':account_activation_token.make_token(username),  
+            # })  
             email = EmailMessage(
                 'Email verification Link | ',
                 body,
@@ -109,18 +109,18 @@ def signup(request):
     return Response({'fail': 'true'})
 
 
-def activate(request, uidb64, token):  
-    try:  
-        uid = force_text(urlsafe_base64_decode(uidb64))  
-        user = User.objects.get(pk=uid)  
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):  
-        user = None  
-    if user is not None and account_activation_token.check_token(user, token):  
-        user.is_active = True  
-        user.save()  
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')  
-    else:  
-        return HttpResponse('Activation link is invalid!')  
+# def activate(request, uidb64, token):  
+#     try:  
+#         uid = force_text(urlsafe_base64_decode(uidb64))  
+#         user = User.objects.get(pk=uid)  
+#     except(TypeError, ValueError, OverflowError, User.DoesNotExist):  
+#         user = None  
+#     if user is not None and account_activation_token.check_token(user, token):  
+#         user.is_active = True  
+#         user.save()  
+#         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')  
+#     else:  
+#         return HttpResponse('Activation link is invalid!')  
 
 
 @api_view(['GET', 'POST', 'OPTIONS'])
