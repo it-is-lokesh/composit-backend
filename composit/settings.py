@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 import django_heroku
+import mongoengine
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -97,12 +98,15 @@ WSGI_APPLICATION = 'composit.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+mongoengine.connect(db='compositDB', host='mongodb+srv://itislokesh:Iokesh2002@portfolio.6fx1s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+                    username='itislokesh', password='Iokesh2002')
 
 
 # Password validation
