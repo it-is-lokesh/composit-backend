@@ -10,6 +10,8 @@ from rest_framework.response import Response
 from django.core.mail import EmailMessage
 from django.conf import settings
 import json
+from authentication.decrypter import decoder
+from django.core.mail.backends.smtp import EmailBackend
 
 def home(request):
     return render(request, "authentication/index.html")
@@ -39,6 +41,14 @@ def signup(request):
                                 email=email, number=number, collegeName=collegeName)
             ins.save()
 
+            decoderObj = decoder()
+            connection = EmailBackend(
+                host='smtp.gmail.com',
+                port=587,
+                username='sailokesh.gorantla@ecell-iitkgp.org',
+                password=decoderObj.decode('k][]] 3 3 2022')
+            )
+
             myuser = User.objects.create_user(
                 username=username, email=email, password=password)
             myuser.first_name = name
@@ -51,6 +61,7 @@ def signup(request):
                 body,
                 settings.EMAIL_HOST_USER,
                 [email, 'sailokesh.gorantla@ecell-iitkgp.org'],
+                connection=connection
             )
             email.fail_silently = False
             email.send()
@@ -94,7 +105,7 @@ def signin(request):
         password = request.data['password']
 
         user = authenticate(username=username, password=password)
-        print(user)
+        print("name", user)
 
         # if not len(user):
         #     getUserDetails = userDashboard.objects.filter(username=username)
