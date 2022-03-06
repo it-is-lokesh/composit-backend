@@ -34,6 +34,7 @@ def signup(request):
         return Response(serializer.data)
 
     if request.method == "POST":
+        c = {'s': False}
         username = request.data['username']
         name = request.data['name']
         email = request.data['email']
@@ -73,7 +74,7 @@ def signup(request):
                 'collegaName': collegeName,
                 'number': number,
                 'email': email,
-                'eventsRegistered': ''
+                'eventsRegistered': '',
             }
             return Response(context)
         if len(userNameCheck):
