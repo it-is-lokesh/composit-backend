@@ -66,9 +66,9 @@ def signup(request):
             email.fail_silently = False
             email.send()
             context = {
-                'success': True,
-                'userNameExists': False,
-                'emailExists': False,
+                'success': 'True',
+                'userNameExists': 'False',
+                'emailExists': 'False',
                 'username': username,
                 'name': name,
                 'collegaName': collegeName,
@@ -79,17 +79,17 @@ def signup(request):
             return Response(context)
         if len(userNameCheck):
             context = {
-                'success': False,
-                'userNameExists': True,
+                'success': 'False',
+                'userNameExists': 'True',
             }
             return Response(context)
         if len(emailCheck):
             context = {
-                'success': False,
-                'emailExists': True
+                'success': 'False',
+                'emailExists': 'True'
             }
             return Response(context)
-    return Response({'fail': True})
+    return Response({'fail': 'True'})
 
 
 @api_view(['GET', 'POST', 'OPTIONS'])
