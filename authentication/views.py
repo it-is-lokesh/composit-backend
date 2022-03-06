@@ -94,27 +94,28 @@ def signin(request):
         password = request.data['password']
 
         user = authenticate(username=username, password=password)
+        print(user)
 
-        if not len(user):
-            getUserDetails = userDashboard.objects.filter(username=username)
-            context = {
-                'userRegistered': 'true',
-                'name': str(getUserDetails[0].name),
-                'collegeName': str(getUserDetails[0].collegeName),
-                'username': str(getUserDetails[0].username),
-                'number': str(getUserDetails[0].number),
-                'email': str(getUserDetails[0].email),
-                'eventsRegistered': str(getUserDetails[0].events_registered),
-            }
-            print(context)
-            return Response(context)
-        elif user is None:
-            context = {
-                'userRegistered': 'false',
-            }
-            return Response(context)
-        else:
-            return Response({'test': 'testw'})
+        # if not len(user):
+        #     getUserDetails = userDashboard.objects.filter(username=username)
+        #     context = {
+        #         'userRegistered': 'true',
+        #         'name': str(getUserDetails[0].name),
+        #         'collegeName': str(getUserDetails[0].collegeName),
+        #         'username': str(getUserDetails[0].username),
+        #         'number': str(getUserDetails[0].number),
+        #         'email': str(getUserDetails[0].email),
+        #         'eventsRegistered': str(getUserDetails[0].events_registered),
+        #     }
+        #     print(context)
+        #     return Response(context)
+        # elif user is None:
+        #     context = {
+        #         'userRegistered': 'false',
+        #     }
+        #     return Response(context)
+        # else:
+        #     return Response({'test': 'testw'})
 
 
 def signout(request):
