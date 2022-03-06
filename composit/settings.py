@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 import django_heroku
-import mongoengine
+import djongo
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -54,7 +55,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -105,8 +105,20 @@ WSGI_APPLICATION = 'composit.wsgi.application'
 #     }
 # }
 
-mongoengine.connect(db='compositDB', host='mongodb+srv://itislokesh:Iokesh2002@portfolio.6fx1s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-                    username='itislokesh', password='Iokesh2002')
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'compositDB',
+        'HOST': 'mongodb+srv://itislokesh:Iokesh2002@portfolio.6fx1s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+        # 'ENFORCE_SCHEMA': False,
+        'USERNAME': 'itislokesh',
+        'AUTHENTICATION': 'SCRAM',
+        'PASSWORD': 'Iokesh2002'
+    }
+}
+
+# mongoengine.connect(db='compositDB', host='mongodb+srv://itislokesh:Iokesh2002@portfolio.6fx1s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+#                     username='itislokesh', password='Iokesh2002')
 
 
 # Password validation
@@ -164,3 +176,5 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'https://composit2022.netlify.app',
 ]
+
+django_heroku.settings(locals())
