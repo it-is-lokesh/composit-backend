@@ -99,20 +99,22 @@ def signin(request):
             getUserDetails = userDashboard.objects.filter(username=username)
             context = {
                 'userRegistered': 'true',
-                'name': getUserDetails[0].name,
-                'collegeName': getUserDetails[0].collegeName,
-                'username': getUserDetails[0].username,
-                'number': getUserDetails[0].number,
-                'email': getUserDetails[0].email,
-                'eventsRegistered': getUserDetails[0].events_registered,
+                'name': str(getUserDetails[0].name),
+                'collegeName': str(getUserDetails[0].collegeName),
+                'username': str(getUserDetails[0].username),
+                'number': str(getUserDetails[0].number),
+                'email': str(getUserDetails[0].email),
+                'eventsRegistered': str(getUserDetails[0].events_registered),
             }
             print(context)
             return Response(context)
-        else:
+        elif user is None:
             context = {
-                'userRegistered': False,
+                'userRegistered': 'false',
             }
             return Response(context)
+        else:
+            return Response({'test': 'testw'})
 
 
 def signout(request):
