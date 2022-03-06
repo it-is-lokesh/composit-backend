@@ -106,14 +106,13 @@ def signin(request):
                 'email': getUserDetails[0].email,
                 'eventsRegistered': getUserDetails[0].events_registered,
             }
+            print(context)
             return Response(context)
         else:
             context = {
                 'userRegistered': False,
             }
             return Response(context)
-
-    return render(request, "authentication/signin.html")
 
 
 def signout(request):
