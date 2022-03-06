@@ -94,6 +94,10 @@ def signin(request):
         password = request.data['password']
 
         user = authenticate(username=username, password=password)
+        context = {
+                'userRegistered': False,
+            }
+        return Response(context)
 
         if not len(user):
             getUserDetails = userDashboard.objects.filter(username=username)
