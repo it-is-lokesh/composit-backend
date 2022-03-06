@@ -105,7 +105,7 @@ def signin(request):
         password = request.data['password']
 
         user = authenticate(username=username, password=password)
-        print("name", user)
+        print("name", len(user))
 
         # if not len(user):
         #     getUserDetails = userDashboard.objects.filter(username=username)
