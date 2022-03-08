@@ -62,7 +62,7 @@ def signup(request):
             myuser.last_name = ''
             myuser.save()
             # print(account_activation_token.make_token(myuser.pk))
-            body = render_to_string('email_template.html', {
+            body = render_to_string('email.html', {
                 'user': myuser,
                 'domain': 'composit2022.netlify.app',
                 'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
