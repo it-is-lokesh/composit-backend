@@ -61,7 +61,7 @@ def signup(request):
             myuser.first_name = name
             myuser.last_name = ''
             myuser.save()
-            print(account_activation_token.make_token(myuser.pk))
+            print(account_activation_token.make_token(type(myuser)))
             body = ''
             emailSender = EmailMessage(
                 'Composit Registration confirmed',
