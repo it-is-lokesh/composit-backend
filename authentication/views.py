@@ -180,6 +180,9 @@ def signin(request):
             return Response(context)
 
 
+
+
+
 def signout(request):
     logout(request)
     messages.success(request, "U are logged out!")

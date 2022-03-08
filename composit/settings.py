@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'django_rest_passwordreset',
 ]
 
 MIDDLEWARE = [
@@ -98,24 +99,24 @@ WSGI_APPLICATION = 'composit.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'NAME': 'compositDB',
-        'HOST': 'mongodb+srv://itislokesh:Iokesh2002@portfolio.6fx1s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-        # 'ENFORCE_SCHEMA': False,
-        'USERNAME': 'itislokesh',
-        'AUTHENTICATION': 'SCRAM',
-        'PASSWORD': 'Iokesh2002'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'compositDB',
+#         'HOST': 'mongodb+srv://itislokesh:Iokesh2002@portfolio.6fx1s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+#         # 'ENFORCE_SCHEMA': False,
+#         'USERNAME': 'itislokesh',
+#         'AUTHENTICATION': 'SCRAM',
+#         'PASSWORD': 'Iokesh2002'
+#     }
+# }
 
 # mongoengine.connect(db='compositDB', host='mongodb+srv://itislokesh:Iokesh2002@portfolio.6fx1s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
 #                     username='itislokesh', password='Iokesh2002')
