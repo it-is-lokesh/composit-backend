@@ -8,11 +8,11 @@
         <input type="text" class="form-control" id="username" name="username" placeholder="create your username" Required>
         <br>
         <label for="" class="form-label">Password</label>
-        <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Enter your password" Required>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" Required>
         <br>
 
         <button type="submit" class="btn btn-primary">Sign In</button>
-       <a href="{% url 'password_reset' %}"><button type="submit" class="btn btn-primary">Forget Password</button></a>
+       <a href="/api/password_reset"><button type="submit" class="btn btn-primary">Forget Password</button></a>
     </form>
 
     <script src="" async defer></script>
