@@ -14,6 +14,11 @@ from authentication.decrypter import decoder
 from django.core.mail.backends.smtp import EmailBackend
 
 
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from .token import account_activation_token
+
 
 def home(request):
     return render(request, "authentication/index.html")
