@@ -55,9 +55,10 @@ def signup(request):
                 username=username, email=email, password=password)
             myuser.first_name = name
             myuser.last_name = ''
+            myuser.is_active = False
             myuser.save()
             # print(account_activation_token.make_token(myuser.pk))
-            body = render_to_string('email.html', {
+            body = render_to_string('email_verification.html', {
                 'user': myuser,
                 'domain': 'composit-api.herokuapp.com',
                 'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
@@ -116,6 +117,25 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
+        body = render_to_string('email.html', {
+                
+        })
+        decoderObj = decoder()
+        connection = EmailBackend(
+                host='smtp.gmail.com',
+                port=587,
+                username='sailokesh.gorantla@ecell-iitkgp.org',
+                password=decoderObj.decode('k][]] 3 3 2022')
+            )
+        # emailSender = EmailMessage(
+        #         'Composit Registration confirmed',
+        #         body,
+        #         settings.EMAIL_HOST_USER,
+        #         [email, 'sailokesh.gorantla@ecell-iitkgp.org'],
+        #         connection=connection
+        # )
+        # emailSender.fail_silently = False
+        # emailSender.send()
         return render(request, 'verification.html')
     else:
         return Response('Activation link is invalid!')
@@ -126,7 +146,8 @@ def signin(request):
     if request.method == 'GET':
         db = userDashboard.objects.all()
         serializer = userDashboardSerializer(db, many=True)
-        return Response(serializer.data)
+        # return Response(serializer.data)
+        return render(request, "")
 
     if request.method == 'POST':
         username = request.data['username']
@@ -152,8 +173,6 @@ def signin(request):
                 'userRegistered': 'false',
             }
             return Response(context)
-        else:
-            return Response({'test': 'testw'})
 
 
 

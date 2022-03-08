@@ -2,6 +2,7 @@ from asyncio import events
 from django.db import models
 
 # Create your models here.
+<<<<<<< HEAD
 
 from django.dispatch import receiver
 from django.urls import reverse
@@ -34,3 +35,5 @@ def password_reset_token_created(sender, instance, reset_password_token, *args, 
 # verification link - Abhyuday
 # 5. rest api - Lokesh
 # 6. scores leaderboard for events
+=======
+>>>>>>> f63f2c95a31e68e6766a891ebc277065eddc2731
