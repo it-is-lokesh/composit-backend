@@ -64,7 +64,7 @@ def signup(request):
             # print(account_activation_token.make_token(myuser.pk))
             body = render_to_string('email.html', {
                 'user': myuser,
-                'domain': 'composit2022.netlify.app',
+                'domain': 'composit-api.herokuapp.com',
                 'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
                 'token': account_activation_token.make_token(myuser),
             })
