@@ -15,7 +15,7 @@ from django.core.mail.backends.smtp import EmailBackend
 
 
 from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from .token import account_activation_token
 
@@ -114,7 +114,7 @@ def signup(request):
 
 def activate(request, uidb64, token):
     try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
+        uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
@@ -159,6 +159,9 @@ def signin(request):
             return Response(context)
         else:
             return Response({'test': 'testw'})
+
+
+
 
 
 def signout(request):
