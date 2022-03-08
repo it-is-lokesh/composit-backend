@@ -60,6 +60,7 @@ def signup(request):
                 username=username, email=email, password=password)
             myuser.first_name = name
             myuser.last_name = ''
+            myuser.is_active = False
             myuser.save()
             # print(account_activation_token.make_token(myuser.pk))
             body = render_to_string('email.html', {
@@ -157,8 +158,6 @@ def signin(request):
                 'userRegistered': 'false',
             }
             return Response(context)
-        else:
-            return Response({'test': 'testw'})
 
 
 def signout(request):
