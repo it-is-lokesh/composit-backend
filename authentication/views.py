@@ -61,8 +61,13 @@ def signup(request):
             myuser.first_name = name
             myuser.last_name = ''
             myuser.save()
-            print(account_activation_token.make_token(myuser))
-            body = ''
+            # print(account_activation_token.make_token(myuser.pk))
+            body = render_to_string('email_template.html', {
+                'user': myuser,
+                'domain': 'composit2022.netlify.app',
+                'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
+                'token': account_activation_token.make_token(myuser),
+            })
             emailSender = EmailMessage(
                 'Composit Registration confirmed',
                 body,
