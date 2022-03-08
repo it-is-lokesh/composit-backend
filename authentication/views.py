@@ -97,6 +97,7 @@ def signup(request):
                 'emailExists': 'false',
                 'userNameExists': 'true',
             }
+            context = json.dumps(context)
             return Response(context)
         if len(emailCheck):
             context = {
@@ -104,6 +105,7 @@ def signup(request):
                 'emailExists': 'true',
                 'userNameExists': 'false',
             }
+            context = json.dumps(context)
             return Response(context)
     return Response({'fail': 'true'})
 
