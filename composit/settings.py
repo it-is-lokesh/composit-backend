@@ -108,7 +108,7 @@ WSGI_APPLICATION = 'composit.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'compositDB',
+        'NAME': 'composit',
         'HOST': 'mongodb+srv://itislokesh:Iokesh2002@portfolio.6fx1s.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
         # 'ENFORCE_SCHEMA': False,
         'USERNAME': 'itislokesh',
