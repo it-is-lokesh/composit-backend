@@ -36,7 +36,7 @@ def signup(request):
         name = request.data['name']
         email = request.data['email']
         number = request.data['number']
-        city = request.data['city']
+        # city = request.data['city']
         collegeName = request.data['collegeName']
         password = request.data['password']
 
@@ -45,7 +45,7 @@ def signup(request):
 
         if not len(userNameCheck) and not len(emailCheck):
             ins = userDashboard(username=username, name=name, email=email,
-                                number=number, city=city, collegeName=collegeName)
+                                number=number, collegeName=collegeName)
             ins.save()
 
             decoderObj = decoder()
