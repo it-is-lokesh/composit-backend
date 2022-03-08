@@ -14,11 +14,11 @@ from authentication.decrypter import decoder
 from django.core.mail.backends.smtp import EmailBackend
 
 
-# from django.shortcuts import render, redirect
-# from django.contrib.sites.shortcuts import get_current_site
-# from django.utils.encoding import force_bytes, force_text
-# from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-# from .token import account_activation_token
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from .token import account_activation_token
+
 
 def home(request):
     return render(request, "authentication/index.html")
@@ -61,7 +61,13 @@ def signup(request):
             myuser.first_name = name
             myuser.last_name = ''
             myuser.save()
-            body = 'test'
+            print(account_activation_token.make_token(myuser.pk))
+            body = render_to_string('email_template.html', {
+                'user': myuser,
+                'domain': 'composit2022.netlify.app',
+                'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
+                'token': account_activation_token.make_token(myuser),
+            })
             emailSender = EmailMessage(
                 'Composit Registration confirmed',
                 body,
@@ -88,30 +94,32 @@ def signup(request):
         if len(userNameCheck):
             context = {
                 'success': 'false',
+                'emailExists': 'false',
                 'userNameExists': 'true',
             }
             return Response(context)
         if len(emailCheck):
             context = {
                 'success': 'false',
-                'emailExists': 'true'
+                'emailExists': 'true',
+                'userNameExists': 'false',
             }
             return Response(context)
     return Response({'fail': 'true'})
 
 
-# def activate(request, uidb64, token):
-#     try:
-#         uid = force_text(urlsafe_base64_decode(uidb64))
-#         user = User.objects.get(pk=uid)
-#     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-#         user = None
-#     if user is not None and account_activation_token.check_token(user, token):
-#         user.is_active = True
-#         user.save()
-#         return Response('Thank you for your email confirmation. Now you can login your account.')
-#     else:
-#         return Response('Activation link is invalid!')
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        return Response('Thank you for your email confirmation. Now you can login your account.')
+    else:
+        return Response('Activation link is invalid!')
 
 
 @api_view(['GET', 'POST', 'OPTIONS'])

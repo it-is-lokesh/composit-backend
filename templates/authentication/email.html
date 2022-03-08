@@ -1,3 +1,5 @@
-Hello {{name}},
-
-Thank you for registering.
+{% autoescape off %}
+Hi ,
+Please click on the link to confirm your registration,
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+{% endautoescape %}
