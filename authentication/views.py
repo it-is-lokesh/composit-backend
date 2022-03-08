@@ -36,6 +36,7 @@ def signup(request):
         name = request.data['name']
         email = request.data['email']
         number = request.data['number']
+        city = request.data['city']
         collegeName = request.data['collegeName']
         password = request.data['password']
 
@@ -43,8 +44,8 @@ def signup(request):
         emailCheck = userDashboard.objects.filter(email=email)
 
         if not len(userNameCheck) and not len(emailCheck):
-            ins = userDashboard(username=username, name=name,
-                                email=email, number=number, collegeName=collegeName)
+            ins = userDashboard(username=username, name=name, email=email,
+                                number=number, city=city, collegeName=collegeName)
             ins.save()
 
             decoderObj = decoder()
@@ -61,15 +62,15 @@ def signup(request):
             myuser.last_name = ''
             myuser.save()
             body = 'test'
-            email = EmailMessage(
-                'Email verification Link',
+            emailSender = EmailMessage(
+                'Composit Registration confirmed',
                 body,
                 settings.EMAIL_HOST_USER,
                 [email, 'sailokesh.gorantla@ecell-iitkgp.org'],
                 connection=connection
             )
-            email.fail_silently = False
-            email.send()
+            emailSender.fail_silently = False
+            emailSender.send()
             context = {
                 'success': 'true',
                 'userNameExists': 'false',
@@ -77,6 +78,7 @@ def signup(request):
                 'username': str(username),
                 'name': str(name),
                 'collegaName': str(collegeName),
+                'city': str(city),
                 'number': str(number),
                 'email': str(email),
                 'eventsRegistered': '',
