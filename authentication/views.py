@@ -84,7 +84,6 @@ def signup(request):
                 'username': str(username),
                 'name': str(name),
                 'collegaName': str(collegeName),
-                'city': str(city),
                 'number': str(number),
                 'email': str(email),
                 'eventsRegistered': '',
