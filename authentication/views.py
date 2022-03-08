@@ -90,6 +90,7 @@ def signup(request):
                 'eventsRegistered': '',
             }
             context = json.dumps(context)
+            print("0", context)
             return Response(context)
         if len(userNameCheck):
             context = {
@@ -98,6 +99,7 @@ def signup(request):
                 'userNameExists': 'true',
             }
             context = json.dumps(context)
+            print("1", context)
             return Response(context)
         if len(emailCheck):
             context = {
@@ -106,6 +108,7 @@ def signup(request):
                 'userNameExists': 'false',
             }
             context = json.dumps(context)
+            print("2", context)
             return Response(context)
     return Response({'fail': 'true'})
 
