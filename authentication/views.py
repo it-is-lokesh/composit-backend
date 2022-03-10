@@ -52,8 +52,7 @@ def signup(request):
                 host='smtp.gmail.com',
                 port=587,
                 username='noreplycomposit2022@gmail.com',
-                # password=decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022')
-                password='composit@2022'
+                password=decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022')
             )
 
             myuser = User.objects.create_user(
@@ -78,27 +77,27 @@ def signup(request):
             emailSender.fail_silently = False
             emailSender.send()
             context = {
-                '"success"': '"true"',
-                '"userNameExists"': '"false"',
-                '"emailExists"': '"false"',
+                'success': 'true',
+                'userNameExists': 'false',
+                'emailExists': 'false',
             }
             context = json.dumps(context)
             print("0", context)
             return Response(context)
         if len(userNameCheck):
             context = {
-                '"success"': '"false"',
-                '"emailExists"': '"false"',
-                '"userNameExists"': '"true"',
+                'success': 'false',
+                'emailExists': 'false',
+                'userNameExists': 'true',
             }
             context = json.dumps(context)
             print(context)
             return Response(context)
         if len(emailCheck):
             context = {
-                '"success"': '"false"',
-                '"emailExists"': '"true"',
-                '"userNameExists"': '"false"',
+                'success': 'false',
+                'emailExists': 'true',
+                'userNameExists': 'false',
             }
             context = json.dumps(context)
             print("2", context)
