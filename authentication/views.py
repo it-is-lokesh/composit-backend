@@ -47,45 +47,45 @@ def signup(request):
                                 number=number, collegeName=collegeName)
             ins.save()
 
-            decoderObj = decoder()
-            connection = EmailBackend(
-                host='smtp.gmail.com',
-                port=587,
-                # username='noreplycomposit2022@gmail.com',
-                username='sailokesh.gorantla@ecell-iitkgp.org'
-                password='sailokesh@2022'
-                # password=decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022')
-            )
+            try:
+                decoderObj = decoder()
+                connection = EmailBackend(
+                    host='smtp.gmail.com',
+                    port=587,
+                    username='noreplycomposit2022@gmail.com',
+                    password=decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022')
+                )
 
-            myuser = User.objects.create_user(
-                username=username, email=email, password=password)
-            myuser.first_name = name
-            myuser.last_name = ''
-            myuser.is_active = False
-            myuser.save()
-            body = render_to_string('email_verification.html', {
-                'user': myuser,
-                'domain': 'composit-api.herokuapp.com',
-                'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
-                'token': account_activation_token.make_token(myuser),
-            })
-            emailSender = EmailMessage(
-                'Composit Registration confirmed',
-                body,
-                settings.EMAIL_HOST_USER,
-                [email, 'sailokesh.gorantla@ecell-iitkgp.org'],
-                connection=connection
-            )
-            emailSender.fail_silently = False
-            emailSender.send()
-            context = {
-                'success': 1,
-                'userNameExists': 0,
-                'emailExists': 0,
-            }
-            # context = json.dumps(context)
-            # print(0, context)
-            return Response(context)
+                myuser = User.objects.create_user(
+                    username=username, email=email, password=password)
+                myuser.first_name = name
+                myuser.last_name = ''
+                myuser.is_active = False
+                myuser.save()
+                body = render_to_string('email_verification.html', {
+                    'user': myuser,
+                    'domain': 'composit-api.herokuapp.com',
+                    'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
+                    'token': account_activation_token.make_token(myuser),
+                })
+                emailSender = EmailMessage(
+                    'Composit Registration confirmed',
+                    body,
+                    settings.EMAIL_HOST_USER,
+                    [email, 'sailokesh.gorantla@ecell-iitkgp.org'],
+                    connection=connection
+                )
+                emailSender.fail_silently = False
+                emailSender.send()
+            finally:
+                context = {
+                    'success': 1,
+                    'userNameExists': 0,
+                    'emailExists': 0,
+                }
+                # context = json.dumps(context)
+                # print(0, context)
+                return Response(context)
         if len(userNameCheck):
             context = {
                 'success': 0,
