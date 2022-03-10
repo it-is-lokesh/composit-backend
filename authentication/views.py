@@ -36,7 +36,7 @@ def signup(request):
         name = request.data['name']
         email = request.data['email']
         number = request.data['number']
-        # city = request.data['city']
+        city = request.data['city']
         collegeName = request.data['collegeName']
         password = request.data['password']
 
@@ -87,7 +87,7 @@ def signup(request):
                 'collegaName': str(collegeName),
                 'number': str(number),
                 'email': str(email),
-                'eventsRegistered': '',
+                'eventsRegistered': '-1',
             }
             context = json.dumps(context)
             print("0", context)
