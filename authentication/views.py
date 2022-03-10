@@ -83,8 +83,12 @@ def signup(request):
                     'userNameExists': 0,
                     'emailExists': 0,
                 }
-                # context = json.dumps(context)
-                # print(0, context)
+                # context = {
+                #     'success': 'true',
+                #     'userNameExists': 'false',
+                #     'emailExists': 'false',
+                # }
+                context = json.dumps(context)
                 return Response(context)
         if len(userNameCheck):
             context = {
