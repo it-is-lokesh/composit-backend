@@ -49,7 +49,7 @@ def signup(request):
 
             if(1):
                 decoderObj = decoder()
-                # print(decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022'))
+                print(decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022'))
                 connection = EmailBackend(
                     host='smtp.gmail.com',
                     port=587,
