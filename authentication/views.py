@@ -36,7 +36,6 @@ def signup(request):
         name = request.data['name']
         email = request.data['email']
         number = request.data['number']
-        # city = request.data['city']
         collegeName = request.data['collegeName']
         password = request.data['password']
 
@@ -62,7 +61,6 @@ def signup(request):
             myuser.last_name = ''
             myuser.is_active = False
             myuser.save()
-            # print(account_activation_token.make_token(myuser.pk))
             body = render_to_string('email_verification.html', {
                 'user': myuser,
                 'domain': 'composit-api.herokuapp.com',
@@ -79,27 +77,26 @@ def signup(request):
             emailSender.fail_silently = False
             emailSender.send()
             context = {
-                "success": "true",
-                "userNameExists": "false",
-                "emailExists": "false",
+                '"success"': '"true"',
+                '"userNameExists"': '"false"',
+                '"emailExists"': '"false"',
             }
             context = json.dumps(context)
             print("0", context)
             return Response(context)
         if len(userNameCheck):
             context = {
-                'success': 'false',
-                'emailExists': 'false',
-                'userNameExists': 'true',
+                '"success"': '"false"',
+                '"emailExists"': '"false"',
+                '"userNameExists"': '"true"',
             }
             context = json.dumps(context)
-            print("1", context)
             return Response(context)
         if len(emailCheck):
             context = {
-                'success': 'false',
-                'emailExists': 'true',
-                'userNameExists': 'false',
+                '"success"': '"false"',
+                '"emailExists"': '"true"',
+                '"userNameExists"': '"false"',
             }
             context = json.dumps(context)
             print("2", context)
@@ -126,8 +123,7 @@ def signin(request):
     if request.method == 'GET':
         db = userDashboard.objects.all()
         serializer = userDashboardSerializer(db, many=True)
-        # return Response(serializer.data)
-        return render(request, "")
+        return Response(serializer.data)
 
     if request.method == 'POST':
         username = request.data['username']
