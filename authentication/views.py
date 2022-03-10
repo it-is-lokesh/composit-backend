@@ -77,27 +77,27 @@ def signup(request):
             emailSender.fail_silently = False
             emailSender.send()
             context = {
-                'success': 'true',
-                'userNameExists': 'false',
-                'emailExists': 'false',
+                '"success"': '"true"',
+                '"userNameExists"': '"false"',
+                '"emailExists"': '"false"',
             }
             context = json.dumps(context)
             print("0", context)
             return Response(context)
         if len(userNameCheck):
             context = {
-                'success': 'false',
-                'emailExists': 'false',
-                'userNameExists': 'true',
+                '"success"': '"false"',
+                '"emailExists"': '"false"',
+                '"userNameExists"': '"true"',
             }
             context = json.dumps(context)
             print(context)
             return Response(context)
         if len(emailCheck):
             context = {
-                'success': 'false',
-                'emailExists': 'true',
-                'userNameExists': 'false',
+                '"success"': '"false"',
+                '"emailExists"': '"true"',
+                '"userNameExists"': '"false"',
             }
             context = json.dumps(context)
             print("2", context)
