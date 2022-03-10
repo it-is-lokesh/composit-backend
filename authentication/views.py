@@ -13,7 +13,6 @@ import json
 from authentication.decrypter import decoder
 from django.core.mail.backends.smtp import EmailBackend
 
-
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -49,14 +48,13 @@ def signup(request):
 
             if(1):
                 decoderObj = decoder()
-                print(decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022'))
+                # print(decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022'))
                 connection = EmailBackend(
                     host='smtp.gmail.com',
                     port=587,
                     username='noreplycomposit2022@gmail.com',
                     password='composit@2022'
                 )
-                
 
                 myuser = User.objects.create_user(
                     username=username, email=email, password=password)
