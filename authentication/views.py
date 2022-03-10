@@ -21,7 +21,7 @@ from .token import account_activation_token
 
 
 def home(request):
-    return render(request, "authentication/index.html")
+    return render(request, 'authentication/index.html')
 
 
 @api_view(['GET', 'POST', 'OPTIONS'])
@@ -31,7 +31,7 @@ def signup(request):
         serializer = userDashboardSerializer(db, many=True)
         return Response(serializer.data)
 
-    if request.method == "POST":
+    if request.method == 'POST':
         username = request.data['username']
         name = request.data['name']
         email = request.data['email']
@@ -77,30 +77,30 @@ def signup(request):
             emailSender.fail_silently = False
             emailSender.send()
             context = {
-                '"success"': '"true"',
-                '"userNameExists"': '"false"',
-                '"emailExists"': '"false"',
+                'success': 1,
+                'userNameExists': 0,
+                'emailExists': 0,
             }
             context = json.dumps(context)
-            print("0", context)
+            print(0, context)
             return Response(context)
         if len(userNameCheck):
             context = {
-                '"success"': '"false"',
-                '"emailExists"': '"false"',
-                '"userNameExists"': '"true"',
+                'success': 0,
+                'emailExists': 0,
+                'userNameExists': 1,
             }
             context = json.dumps(context)
             print(context)
             return Response(context)
         if len(emailCheck):
             context = {
-                '"success"': '"false"',
-                '"emailExists"': '"true"',
-                '"userNameExists"': '"false"',
+                'success': 0,
+                'emailExists': 1,
+                'userNameExists': 0,
             }
             context = json.dumps(context)
-            print("2", context)
+            print(2, context)
             return Response(context)
     return Response({'fail': 'true'})
 
@@ -147,12 +147,12 @@ def signin(request):
             return Response(context)
         elif user is None:
             context = {
-                '"userRegistered"': '"false"',
+                'userRegistered': 'false',
             }
             return Response(context)
 
 
 def signout(request):
     logout(request)
-    messages.success(request, "U are logged out!")
+    messages.success(request, 'U are logged out!')
     return redirect('home')
