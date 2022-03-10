@@ -36,7 +36,7 @@ def signup(request):
         name = request.data['name']
         email = request.data['email']
         number = request.data['number']
-        city = request.data['city']
+        # city = request.data['city']
         collegeName = request.data['collegeName']
         password = request.data['password']
 
@@ -79,15 +79,9 @@ def signup(request):
             emailSender.fail_silently = False
             emailSender.send()
             context = {
-                'success': 'true',
-                'userNameExists': 'false',
-                'emailExists': 'false',
-                'username': str(username),
-                'name': str(name),
-                'collegaName': str(collegeName),
-                'number': str(number),
-                'email': str(email),
-                'eventsRegistered': '-1',
+                "success": "true",
+                "userNameExists": "false",
+                "emailExists": "false",
             }
             context = json.dumps(context)
             print("0", context)
