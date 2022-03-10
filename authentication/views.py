@@ -49,12 +49,12 @@ def signup(request):
 
             if(1):
                 decoderObj = decoder()
-                print(decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022'))
+                # print(decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022'))
                 connection = EmailBackend(
                     host='smtp.gmail.com',
                     port=587,
                     username='noreplycomposit2022@gmail.com',
-                    password=decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022')
+                    password='composit@2022'
                 )
                 
 
@@ -85,11 +85,6 @@ def signup(request):
                     'userNameExists': 0,
                     'emailExists': 0,
                 }
-                # context = {
-                #     'success': 'true',
-                #     'userNameExists': 'false',
-                #     'emailExists': 'false',
-                # }
                 context = json.dumps(context)
                 return Response(context)
         if len(userNameCheck):
