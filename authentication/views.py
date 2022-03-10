@@ -49,12 +49,14 @@ def signup(request):
 
             try:
                 decoderObj = decoder()
+                print(decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022'))
                 connection = EmailBackend(
                     host='smtp.gmail.com',
                     port=587,
                     username='noreplycomposit2022@gmail.com',
                     password=decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022')
                 )
+                
 
                 myuser = User.objects.create_user(
                     username=username, email=email, password=password)
@@ -108,7 +110,7 @@ def signup(request):
             context = json.dumps(context)
             print(2, context)
             return Response(context)
-    return Response({'fail': 'true'})
+    return Response({'fail': 1})
 
 
 def activate(request, uidb64, token):
