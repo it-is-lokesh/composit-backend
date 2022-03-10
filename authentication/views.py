@@ -91,6 +91,7 @@ def signup(request):
                 '"userNameExists"': '"true"',
             }
             context = json.dumps(context)
+            print(context)
             return Response(context)
         if len(emailCheck):
             context = {
@@ -146,7 +147,7 @@ def signin(request):
             return Response(context)
         elif user is None:
             context = {
-                'userRegistered': 'false',
+                '"userRegistered"': '"false"',
             }
             return Response(context)
 
