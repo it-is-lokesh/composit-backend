@@ -47,7 +47,7 @@ def signup(request):
                                 number=number, collegeName=collegeName)
             ins.save()
 
-            try:
+            if(1):
                 decoderObj = decoder()
                 print(decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022'))
                 connection = EmailBackend(
@@ -79,7 +79,7 @@ def signup(request):
                 )
                 emailSender.fail_silently = False
                 emailSender.send()
-            finally:
+            if(1):
                 context = {
                     'success': 1,
                     'userNameExists': 0,
