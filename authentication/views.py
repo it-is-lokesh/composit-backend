@@ -52,7 +52,8 @@ def signup(request):
                 host='smtp.gmail.com',
                 port=587,
                 username='noreplycomposit2022@gmail.com',
-                password=decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022')
+                # password=decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022')
+                password='composit@2022'
             )
 
             myuser = User.objects.create_user(
