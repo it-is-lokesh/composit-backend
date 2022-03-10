@@ -39,8 +39,8 @@ def signup(request):
         collegeName = request.data['collegeName']
         password = request.data['password']
 
-        userNameCheck = userDashboard.objects.filter(username=username)
-        emailCheck = userDashboard.objects.filter(email=email)
+        userNameCheck = User.objects.filter(username=username)
+        emailCheck = User.objects.filter(email=email)
 
         if not len(userNameCheck) and not len(emailCheck):
             ins = userDashboard(username=username, name=name, email=email,
@@ -51,8 +51,10 @@ def signup(request):
             connection = EmailBackend(
                 host='smtp.gmail.com',
                 port=587,
-                username='noreplycomposit2022@gmail.com',
-                password=decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022')
+                # username='noreplycomposit2022@gmail.com',
+                username='sailokesh.gorantla@ecell-iitkgp.org'
+                password='sailokesh@2022'
+                # password=decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022')
             )
 
             myuser = User.objects.create_user(
@@ -81,8 +83,8 @@ def signup(request):
                 'userNameExists': 0,
                 'emailExists': 0,
             }
-            context = json.dumps(context)
-            print(0, context)
+            # context = json.dumps(context)
+            # print(0, context)
             return Response(context)
         if len(userNameCheck):
             context = {
