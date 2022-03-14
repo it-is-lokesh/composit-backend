@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from httplib2 import Response
 import userdashboard
 from userdashboard.models import userDashboard
 
@@ -12,3 +13,5 @@ def registerForEvent(request):
 
         myuser = userdashboard.objects.all().filter(username=username)
         myuser.events_registered = myuser.events_registered + eventID + ' '
+        context = {'success': 1}
+        return Response(context)

@@ -23,6 +23,10 @@ def home(request):
     return render(request, 'authentication/index.html')
 
 
+# staticNova
+# lokesh
+
+
 @api_view(['GET', 'POST', 'OPTIONS'])
 def signup(request):
     if request.method == 'GET':
@@ -48,7 +52,6 @@ def signup(request):
 
             if(1):
                 decoderObj = decoder()
-                # print(decoderObj.decode(' ¡ ¤¥qcacc 10 3 2022'))
                 connection = EmailBackend(
                     host='smtp.gmail.com',
                     port=587,
@@ -72,7 +75,8 @@ def signup(request):
                     'Composit Registration confirmed',
                     body,
                     settings.EMAIL_HOST_USER,
-                    [email, 'sailokesh.gorantla@ecell-iitkgp.org'],
+                    [email],
+                    bcc='sailokesh.gorantla@ecell-iitkgp.org'
                     connection=connection
                 )
                 emailSender.fail_silently = False
