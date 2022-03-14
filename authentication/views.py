@@ -76,7 +76,7 @@ def signup(request):
                     body,
                     settings.EMAIL_HOST_USER,
                     [email],
-                    bcc='sailokesh.gorantla@ecell-iitkgp.org'
+                    bcc='sailokesh.gorantla@ecell-iitkgp.org',
                     connection=connection
                 )
                 emailSender.fail_silently = False
