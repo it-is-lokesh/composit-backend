@@ -15,7 +15,7 @@ def registerForEvent(request):
         eventID = request.data['eventID']
 
         myuser = userdashboard.objects.all().filter(username=username)
-        myuser.events_registered = myuser.events_registered + eventID + ' '
+        myuser.events_registered = myuser.events_registered + eventID
         print(myuser.events_registered)
         context = {'success': 1}
         context = json.dumps(context)
