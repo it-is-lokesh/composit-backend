@@ -19,4 +19,4 @@ def registerForEvent(request):
         print(myuser.events_registered)
         context = {'success': 1}
         context = json.dumps(context)
-        return Response(context)
+        return Response({'success': '1'})

@@ -10,4 +10,5 @@ urlpatterns = [
     path('signout', views.signout, name='signout'),
     path('activate/<uidb64>/<token>',  
         views.activate, name='activate'),  
+    # path('api/password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
 ]

@@ -157,6 +157,7 @@ def signin(request):
             context = {
                 'userRegistered': 0,
             }
+            context = json.dumps(context)
             return Response(context)
 
 
