@@ -152,6 +152,7 @@ def signin(request):
                 'date': str(getUserDetails[0].datestamp),
             }
             context = json.dumps(context)
+            print(context)
             return Response(context)
         elif user is None:
             context = {
