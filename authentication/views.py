@@ -51,7 +51,7 @@ def signup(request):
                                 number=number, collegeName=collegeName, ambassador=ambassador)
             ins.save()
 
-            if(1):
+            try:
                 decoderObj = decoder()
                 connection = EmailBackend(
                     host='smtp.gmail.com',
@@ -77,12 +77,12 @@ def signup(request):
                     body,
                     settings.EMAIL_HOST_USER,
                     [email],
-                    bcc='sailokesh.gorantla@ecell-iitkgp.org',
+                    bcc=['sailokesh.gorantla@ecell-iitkgp.org'],
                     connection=connection
                 )
                 emailSender.fail_silently = False
                 emailSender.send()
-            if(1):
+            finally:
                 context = {
                     'success': 1,
                     'userNameExists': 0,
