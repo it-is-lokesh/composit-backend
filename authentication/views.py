@@ -139,7 +139,6 @@ def signin(request):
         user = authenticate(username=username, password=password)
 
         if user is not None:
-            #  £¤pb`bb 10 3 2022
             getUserDetails = userDashboard.objects.filter(username=username)
             context = {
                 'userRegistered': 1,
@@ -156,7 +155,7 @@ def signin(request):
             return Response(context)
         elif user is None:
             context = {
-                'userRegistered': 'false',
+                'userRegistered': 0,
             }
             return Response(context)
 
