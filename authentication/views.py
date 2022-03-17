@@ -41,13 +41,14 @@ def signup(request):
         number = request.data['number']
         collegeName = request.data['collegeName']
         password = request.data['password']
+        ambassador = request.data['ambassador']
 
         userNameCheck = User.objects.filter(username=username)
         emailCheck = User.objects.filter(email=email)
 
         if not len(userNameCheck) and not len(emailCheck):
             ins = userDashboard(username=username, name=name, email=email,
-                                number=number, collegeName=collegeName)
+                                number=number, collegeName=collegeName, ambassador=ambassador)
             ins.save()
 
             if(1):
