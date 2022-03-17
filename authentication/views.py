@@ -142,7 +142,7 @@ def signin(request):
             #  £¤pb`bb 10 3 2022
             getUserDetails = userDashboard.objects.filter(username=username)
             context = {
-                'userRegistered': 'true',
+                'userRegistered': 1,
                 'name': str(getUserDetails[0].name),
                 'collegeName': str(getUserDetails[0].collegeName),
                 'username': str(getUserDetails[0].username),
@@ -152,7 +152,7 @@ def signin(request):
                 'date': str(getUserDetails[0].datestamp),
             }
             context = json.dumps(context)
-            print(context)
+            # print(context)
             return Response(context)
         elif user is None:
             context = {
